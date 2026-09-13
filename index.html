@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Glow Odonto & Skin</title>
+<style>
+  :root {
+    --bg-1: #0B0719;
+    --bg-2: #180E29;
+    --bg-3: #230A3E;
+    --card-bg: rgba(32, 20, 56, 0.75);
+    --card-border: #3D2862;
+    --glow-purple: #9D4EDD;
+    --glow-pink: #F72585;
+    --glow-cyan: #00F2FE;
+    --text-primary: #FFFFFF;
+    --text-secondary: #A0A0C0;
+    --text-muted: #6C6C8A;
+    --accent-green: #00F5D4;
+    --nav-bg: rgba(15, 10, 30, 0.95);
+    --r-sm: 10px;
+    --r-md: 18px;
+    --r-lg: 26px;
+    --r-pill: 999px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background: #050208;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 24px 12px;
+  }
+
+  .phone {
+    width: 390px;
+    max-width: 100%;
+    min-height: 780px;
+    background: linear-gradient(160deg, var(--bg-1), var(--bg-2) 55%, var(--bg-3));
+    border-radius: 36px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 0 8px #0d0a16;
+  }
+
+  .screen { display: none; min-height: 780px; padding-bottom: 30px; }
+  .screen.active { display: block; animation: fadein .25s ease; }
+  @keyframes fadein { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+  /* ---------- Onboarding ---------- */
+  #screen-onboarding { padding: 0; position: relative; height: 780px; }
+  .hero-img {
+    width: 100%;
+    height: 62%;
+    object-fit: cover;
+    display: block;
+  }
+  .hero-overlay {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 56%;
+    background: linear-gradient(to bottom, transparent, rgba(11,7,25,0.75), #0B0719 85%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 24px;
+  }
+  .badge-text { color: var(--glow-cyan); font-size: 12px; font-weight: 700; letter-spacing: 2px; margin-bottom: 8px; }
+  .onb-title { color: #fff; font-size: 26px; font-weight: 700; margin-bottom: 8px; }
+  .onb-subtitle { color: var(--text-secondary); font-size: 14px; line-height: 20px; margin-bottom: 22px; }
+
+  .btn-glow {
+    display: block;
+    width: 100%;
+    border: none;
+    border-radius: var(--r-pill);
+    padding: 16px;
+    text-align: center;
+    color: #fff;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 1px;
+    background: linear-gradient(90deg, var(--glow-pink), var(--glow-purple));
+    box-shadow: 0 4px 18px rgba(247,37,133,0.45);
+    cursor: pointer;
+  }
+
+  /* ---------- Generic layout ---------- */
+  .content { padding: 44px 20px 20px; }
+  .top-header {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 44px 20px 12px;
+  }
+  .top-header .title { color: #fff; font-size: 18px; font-weight: 700; }
+  .back-btn {
+    background: none; border: none; color: #fff; font-size: 20px; cursor: pointer;
+    width: 24px; text-align: left;
+  }
+
+  .welcome-text { color: var(--text-secondary); font-size: 12px; letter-spacing: 1px; }
+  .brand-title { color: #fff; font-size: 20px; font-weight: 700; letter-spacing: 1.5px; }
+  .avatar-glow {
+    width: 42px; height: 42px; border-radius: 21px;
+    background: linear-gradient(135deg, var(--glow-pink), var(--glow-purple));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; cursor: pointer; border: none;
+  }
+
+  .featured-card {
+    border-radius: var(--r-md);
+    overflow: hidden;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 18px rgba(157,78,221,0.4);
+    cursor: pointer;
+  }
+  .featured-gradient {
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--card-border);
+    border-radius: var(--r-md);
+    background: linear-gradient(120deg, rgba(157,78,221,0.3), rgba(247,37,133,0.15));
+  }
+  .doctor-thumb { width: 70px; height: 85px; border-radius: var(--r-sm); object-fit: cover; }
+  .doctor-info { margin-left: 15px; flex: 1; }
+  .doctor-badge { color: var(--glow-cyan); font-size: 9px; font-weight: 700; letter-spacing: 1px; }
+  .doctor-name { color: #fff; font-size: 16px; font-weight: 700; margin-top: 2px; }
+  .doctor-spec { color: var(--text-secondary); font-size: 12px; }
+  .doctor-rating { color: var(--glow-pink); font-size: 12px; margin-top: 4px; font-weight: 700; }
+
+  .section-header { color: #fff; font-size: 16px; font-weight: 600; margin: 10px 0 15px; }
+
+  .horizontal-scroll { display: flex; overflow-x: auto; gap: 15px; margin-bottom: 25px; padding-bottom: 4px; }
+  .horizontal-scroll::-webkit-scrollbar { display: none; }
+  .glow-card {
+    min-width: 210px; padding: 16px; border-radius: var(--r-md);
+    border: 1px solid var(--card-border);
+  }
+  .glow-card.g1 { background: linear-gradient(120deg, rgba(157,78,221,0.2), rgba(247,37,133,0.1)); }
+  .glow-card.g2 { background: linear-gradient(120deg, rgba(0,242,254,0.2), rgba(114,9,183,0.1)); }
+  .card-icon { font-size: 22px; }
+  .card-tag { color: var(--glow-pink); font-size: 9px; font-weight: 700; margin-top: 8px; display: block; }
+  .glow-card.g2 .card-tag { color: var(--glow-cyan); }
+  .card-title { color: #fff; font-size: 15px; font-weight: 700; margin: 4px 0; }
+  .card-desc { color: var(--text-secondary); font-size: 11px; line-height: 15px; }
+
+  .grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .grid-item {
+    background: var(--card-bg); border-radius: var(--r-md); padding: 18px 12px;
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    border: 1px solid var(--card-border); cursor: pointer;
+  }
+  .grid-item .icon { font-size: 24px; }
+  .grid-item .label { color: #fff; font-size: 12px; font-weight: 500; text-align: center; }
+
+  /* ---------- Doctor list ---------- */
+  .doctor-card {
+    background: var(--card-bg); border-radius: var(--r-md); padding: 14px;
+    display: flex; align-items: center; gap: 12px; margin-bottom: 12px;
+    border: 1px solid var(--card-border); cursor: pointer;
+  }
+  .doctor-card img { width: 55px; height: 65px; border-radius: var(--r-sm); object-fit: cover; }
+  .doctor-card .info { flex: 1; }
+  .doctor-card .name { color: #fff; font-size: 15px; font-weight: 700; }
+  .doctor-card .spec { color: var(--text-secondary); font-size: 12px; }
+  .doctor-card .meta { color: var(--glow-pink); font-size: 11px; margin-top: 4px; }
+  .chevron { color: var(--glow-cyan); font-size: 18px; }
+
+  /* ---------- Doctor profile ---------- */
+  .profile-content { padding: 44px 20px 20px; display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .profile-image { width: 140px; height: 160px; border-radius: var(--r-md); object-fit: cover; margin-bottom: 15px; }
+  .profile-name { color: #fff; font-size: 22px; font-weight: 700; }
+  .profile-spec { color: var(--glow-cyan); font-size: 14px; margin-bottom: 5px; }
+  .profile-price { color: var(--glow-pink); font-size: 15px; font-weight: 700; margin-bottom: 20px; }
+  .info-card {
+    background: var(--card-bg); padding: 18px; border-radius: var(--r-md);
+    border: 1px solid var(--card-border); width: 100%; margin-bottom: 25px; text-align: left;
+  }
+  .info-card .title2 { color: #fff; font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+  .info-card .about { color: var(--text-secondary); font-size: 13px; line-height: 18px; }
+  .actions { display: flex; width: 100%; gap: 10px; }
+  .chat-btn {
+    flex: 1; background: var(--card-bg); border: 1px solid var(--card-border);
+    border-radius: var(--r-pill); display: flex; align-items: center; justify-content: center;
+    gap: 6px; padding: 14px; color: #fff; font-weight: 700; font-size: 13px; cursor: pointer;
+  }
+  .book-btn {
+    flex: 2; border-radius: var(--r-pill); overflow: hidden; border: none;
+    box-shadow: 0 4px 18px rgba(247,37,133,0.45); cursor: pointer;
+  }
+  .book-btn-inner {
+    padding: 14px; text-align: center; color: #fff; font-weight: 700; font-size: 13px;
+    background: linear-gradient(90deg, var(--glow-pink), var(--glow-purple));
+  }
+
+  /* ---------- Appointment ---------- */
+  .days-scroll { display: flex; gap: 10px; overflow-x: auto; margin-bottom: 25px; }
+  .day-card {
+    min-width: 60px; height: 75px; background: var(--card-bg); border-radius: var(--r-md);
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    border: 1px solid var(--card-border); cursor: pointer;
+  }
+  .day-card.selected { border-color: var(--glow-cyan); background: rgba(0,242,254,0.15); }
+  .day-card .d-label { color: var(--text-muted); font-size: 10px; }
+  .day-card .d-num { color: #fff; font-size: 18px; font-weight: 700; margin-top: 4px; }
+  .day-card.selected .d-num { color: var(--glow-cyan); }
+
+  .time-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 30px; }
+  .time-chip {
+    padding: 12px 20px; background: var(--card-bg); border-radius: var(--r-pill);
+    border: 1px solid var(--card-border); color: var(--text-secondary); font-size: 13px; cursor: pointer;
+  }
+  .time-chip.selected { border-color: var(--glow-pink); background: rgba(247,37,133,0.15); color: var(--glow-pink); font-weight: 700; }
+
+  .confirm-btn { border-radius: var(--r-pill); overflow: hidden; margin-top: 10px; border: none; box-shadow: 0 4px 18px rgba(247,37,133,0.45); cursor: pointer; width: 100%; }
+  .confirm-btn-inner { padding: 16px; text-align: center; color: #fff; font-weight: 700; font-size: 14px; letter-spacing: 1px; background: linear-gradient(90deg, var(--glow-pink), var(--glow-purple)); }
+
+  /* ---------- Chat ---------- */
+  .chat-area { padding: 20px; display: flex; flex-direction: column; gap: 10px; min-height: 480px; }
+  .msg-bubble { padding: 14px; border-radius: var(--r-md); max-width: 78%; font-size: 13px; color: #fff; }
+  .msg-bubble.doctor { background: var(--card-bg); border-left: 3px solid var(--glow-pink); align-self: flex-start; }
+  .msg-bubble.user { background: #3D2862; align-self: flex-end; }
+  .input-bar {
+    display: flex; align-items: center; gap: 10px; padding: 15px;
+    background: var(--nav-bg); position: sticky; bottom: 0;
+  }
+  .chat-input {
+    flex: 1; background: var(--card-bg); color: #fff; border-radius: var(--r-pill);
+    padding: 0 16px; height: 42px; border: 1px solid var(--card-border); font-size: 13px;
+  }
+  .send-btn {
+    background: var(--glow-purple); width: 42px; height: 42px; border-radius: 21px;
+    border: none; color: #fff; font-size: 16px; cursor: pointer;
+  }
+
+  /* ---------- My Appointments ---------- */
+  .appt-card { background: var(--card-bg); border-radius: var(--r-md); padding: 16px; margin-bottom: 12px; border: 1px solid var(--card-border); }
+  .appt-header { display: flex; justify-content: space-between; margin-bottom: 6px; }
+  .appt-doc { color: #fff; font-size: 15px; font-weight: 700; }
+  .appt-status { color: var(--glow-cyan); font-size: 11px; font-weight: 700; }
+  .appt-type { color: var(--text-secondary); font-size: 12px; }
+  .appt-date { color: var(--glow-pink); font-size: 12px; margin-top: 8px; }
+
+  /* ---------- Settings ---------- */
+  .menu-item {
+    background: var(--card-bg); padding: 16px; border-radius: var(--r-md);
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 10px; border: 1px solid var(--card-border); color: #fff; font-size: 14px; cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<div class="phone">
+
+  <!-- ONBOARDING -->
+  <section id="screen-onboarding" class="screen active">
+    <img class="hero-img" src="assets/dentist-hero.png" alt="Dra. Cibele Arabise">
+    <div class="hero-overlay">
+      <span class="badge-text">GLOW ODONTO & SKIN</span>
+      <div class="onb-title">Dra. Cibele Arabise</div>
+      <p class="onb-subtitle">Alinhadores invisíveis, harmonização orofacial e cuidados avançados com a pele e glicação.</p>
+      <button class="btn-glow" onclick="showScreen('home')">ENTRAR NO APLICATIVO</button>
+    </div>
+  </section>
+
+  <!-- HOME -->
+  <section id="screen-home" class="screen">
+    <div class="content" style="padding-top:44px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+        <div>
+          <div class="welcome-text">Bem-vindo(a) ao</div>
+          <div class="brand-title">GLOW ODONTO & SKIN</div>
+        </div>
+        <button class="avatar-glow" onclick="showScreen('settings')">👤</button>
+      </div>
+
+      <div class="featured-card" onclick="showScreen('doctor-profile')">
+        <div class="featured-gradient">
+          <img class="doctor-thumb" src="assets/dentist-hero.png" alt="Dra. Cibele Arabise">
+          <div class="doctor-info">
+            <div class="doctor-badge">DENTISTA EM DESTAQUE</div>
+            <div class="doctor-name">Dra. Cibele Arabise</div>
+            <div class="doctor-spec">Ortodontia & Estética Orofacial</div>
+            <div class="doctor-rating">★ 4.9 (128 avaliações)</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-header">Educação, Pele & Glicação</div>
+      <div class="horizontal-scroll">
+        <div class="glow-card g1">
+          <div class="card-icon">🧬</div>
+          <span class="card-tag">GLICAÇÃO CUTÂNEA</span>
+          <div class="card-title">Impacto na Pele & Gengiva</div>
+          <div class="card-desc">Como o acúmulo de açúcares danifica as fibras de colágeno e afeta o sorriso.</div>
+        </div>
+        <div class="glow-card g2">
+          <div class="card-icon">✨</div>
+          <span class="card-tag">TIPOS DE PELE</span>
+          <div class="card-title">Avaliação Orofacial</div>
+          <div class="card-desc">Identifique se sua pele é seca, oleosa, mista ou sensível para os tratamentos corretos.</div>
+        </div>
+      </div>
+
+      <div class="section-header">Navegação Rápida</div>
+      <div class="grid-container">
+        <div class="grid-item" onclick="showScreen('doctor-list')">
+          <div class="icon">🦷</div>
+          <div class="label">Dentistas/Médicos</div>
+        </div>
+        <div class="grid-item" onclick="showScreen('appointment')">
+          <div class="icon">📅</div>
+          <div class="label">Agendar Consulta</div>
+        </div>
+        <div class="grid-item" onclick="showScreen('chat')">
+          <div class="icon">💬</div>
+          <div class="label">Consulta por Chat</div>
+        </div>
+        <div class="grid-item" onclick="showScreen('my-appointments')">
+          <div class="icon">📋</div>
+          <div class="label">Minhas Consultas</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DOCTOR LIST -->
+  <section id="screen-doctor-list" class="screen">
+    <div class="top-header">
+      <button class="back-btn" onclick="showScreen('home')">←</button>
+      <div class="title">Profissionais de Saúde</div>
+      <div style="width:24px;"></div>
+    </div>
+    <div class="content" style="padding-top:0;">
+      <div class="doctor-card" onclick="showScreen('doctor-profile')">
+        <img src="assets/dentist-hero.png" alt="Dra. Cibele Arabise">
+        <div class="info">
+          <div class="name">Dra. Cibele Arabise</div>
+          <div class="spec">Ortodontia & Estética Orofacial</div>
+          <div class="meta">📍 São Paulo, SP • ★ 4.9</div>
+        </div>
+        <div class="chevron">›</div>
+      </div>
+      <div class="doctor-card">
+        <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=200" alt="Dr. Lucas Hayes">
+        <div class="info">
+          <div class="name">Dr. Lucas Hayes</div>
+          <div class="spec">Implantodontia & Prótese</div>
+          <div class="meta">📍 Rio de Janeiro, RJ • ★ 4.8</div>
+        </div>
+        <div class="chevron">›</div>
+      </div>
+      <div class="doctor-card">
+        <img src="https://images.unsplash.com/photo-1594824813566-88855ce78341?w=200" alt="Dra. Helena Wells">
+        <div class="info">
+          <div class="name">Dra. Helena Wells</div>
+          <div class="spec">Dermatologia & Saúde Cutânea</div>
+          <div class="meta">📍 Brasília, DF • ★ 4.9</div>
+        </div>
+        <div class="chevron">›</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DOCTOR PROFILE -->
+  <section id="screen-doctor-profile" class="screen">
+    <div class="profile-content">
+      <button class="back-btn" style="align-self:flex-start;margin-bottom:15px;" onclick="showScreen('doctor-list')">←</button>
+      <img class="profile-image" src="assets/dentist-hero.png" alt="Dra. Cibele Arabise">
+      <div class="profile-name">Dra. Cibele Arabise</div>
+      <div class="profile-spec">Ortodontia & Estética Orofacial</div>
+      <div class="profile-price">Valor da Consulta: R$ 280,00</div>
+      <div class="info-card">
+        <div class="title2">Sobre o Profissional</div>
+        <div class="about">Especialista em alinhadores invisíveis, harmonização orofacial e tratamento preventivo de glicação na estética gengival.</div>
+      </div>
+      <div class="actions">
+        <button class="chat-btn" onclick="showScreen('chat')">💬 Chat</button>
+        <button class="book-btn" onclick="showScreen('appointment')">
+          <div class="book-btn-inner">Agendar Consulta</div>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- APPOINTMENT -->
+  <section id="screen-appointment" class="screen">
+    <div class="top-header">
+      <button class="back-btn" onclick="showScreen('doctor-profile')">←</button>
+      <div class="title">Agendamento</div>
+      <div style="width:24px;"></div>
+    </div>
+    <div class="content" style="padding-top:0;">
+      <div class="section-header" style="font-size:14px;color:var(--text-secondary);font-weight:400;">Selecione o Dia</div>
+      <div class="days-scroll" id="days-scroll">
+        <div class="day-card selected" data-day="14"><span class="d-label">SET</span><span class="d-num">14</span></div>
+        <div class="day-card" data-day="15"><span class="d-label">SET</span><span class="d-num">15</span></div>
+        <div class="day-card" data-day="16"><span class="d-label">SET</span><span class="d-num">16</span></div>
+        <div class="day-card" data-day="17"><span class="d-label">SET</span><span class="d-num">17</span></div>
+        <div class="day-card" data-day="18"><span class="d-label">SET</span><span class="d-num">18</span></div>
+      </div>
+
+      <div class="section-header" style="font-size:14px;color:var(--text-secondary);font-weight:400;">Horários Disponíveis</div>
+      <div class="time-grid" id="time-grid">
+        <div class="time-chip" data-time="09:00">09:00</div>
+        <div class="time-chip" data-time="10:30">10:30</div>
+        <div class="time-chip selected" data-time="14:00">14:00</div>
+        <div class="time-chip" data-time="15:30">15:30</div>
+        <div class="time-chip" data-time="17:00">17:00</div>
+      </div>
+
+      <button class="confirm-btn" onclick="confirmBooking()">
+        <div class="confirm-btn-inner">CONFIRMAR AGENDAMENTO</div>
+      </button>
+    </div>
+  </section>
+
+  <!-- CHAT -->
+  <section id="screen-chat" class="screen" style="display:flex;flex-direction:column;">
+    <div class="top-header">
+      <button class="back-btn" onclick="showScreen('doctor-profile')">←</button>
+      <div class="title">Dra. Cibele Arabise</div>
+      <div style="width:24px;"></div>
+    </div>
+    <div class="chat-area" id="chat-area">
+      <div class="msg-bubble doctor">Olá! Sou a Dra. Cibele Arabise. Como posso te ajudar com seu sorriso ou estética hoje?</div>
+    </div>
+    <div class="input-bar">
+      <input class="chat-input" id="chat-input" type="text" placeholder="Digite sua mensagem...">
+      <button class="send-btn" onclick="sendMessage()">➤</button>
+    </div>
+  </section>
+
+  <!-- MY APPOINTMENTS -->
+  <section id="screen-my-appointments" class="screen">
+    <div class="top-header">
+      <button class="back-btn" onclick="showScreen('home')">←</button>
+      <div class="title">Minhas Consultas</div>
+      <div style="width:24px;"></div>
+    </div>
+    <div class="content" style="padding-top:0;">
+      <div class="appt-card">
+        <div class="appt-header">
+          <div class="appt-doc">Dra. Cibele Arabise</div>
+          <div class="appt-status">Confirmada</div>
+        </div>
+        <div class="appt-type">Avaliação Estética Orofacial</div>
+        <div class="appt-date">📅 15 de Setembro - 14:00</div>
+      </div>
+      <div class="appt-card">
+        <div class="appt-header">
+          <div class="appt-doc">Dra. Helena Wells</div>
+          <div class="appt-status">Pendente</div>
+        </div>
+        <div class="appt-type">Análise de Glicação & Pele</div>
+        <div class="appt-date">📅 22 de Setembro - 10:30</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SETTINGS -->
+  <section id="screen-settings" class="screen">
+    <div class="top-header">
+      <button class="back-btn" onclick="showScreen('home')">←</button>
+      <div class="title">Configurações</div>
+      <div style="width:24px;"></div>
+    </div>
+    <div class="content" style="padding-top:0;">
+      <div class="menu-item">Perfil do Paciente <span class="chevron">›</span></div>
+      <div class="menu-item">Notificações <span class="chevron">›</span></div>
+      <div class="menu-item">Histórico Clínico <span class="chevron">›</span></div>
+      <div class="menu-item">Políticas de Privacidade <span class="chevron">›</span></div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+  function showScreen(name) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById('screen-' + name).classList.add('active');
+  }
+
+  // Appointment day/time selection
+  document.getElementById('days-scroll').addEventListener('click', (e) => {
+    const card = e.target.closest('.day-card');
+    if (!card) return;
+    document.querySelectorAll('.day-card').forEach(c => c.classList.remove('selected'));
+    card.classList.add('selected');
+  });
+
+  document.getElementById('time-grid').addEventListener('click', (e) => {
+    const chip = e.target.closest('.time-chip');
+    if (!chip) return;
+    document.querySelectorAll('.time-chip').forEach(c => c.classList.remove('selected'));
+    chip.classList.add('selected');
+  });
+
+  function confirmBooking() {
+    alert('Agendamento Solicitado!\nSua consulta odonto-estética foi enviada com sucesso.');
+    showScreen('my-appointments');
+  }
+
+  // Chat
+  function sendMessage() {
+    const input = document.getElementById('chat-input');
+    const text = input.value.trim();
+    if (!text) return;
+    const area = document.getElementById('chat-area');
+    const bubble = document.createElement('div');
+    bubble.className = 'msg-bubble user';
+    bubble.textContent = text;
+    area.appendChild(bubble);
+    input.value = '';
+    area.scrollTop = area.scrollHeight;
+  }
+  document.getElementById('chat-input').addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') sendMessage();
+  });
+</script>
+
+</body>
+</html>
