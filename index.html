@@ -36,7 +36,7 @@
       padding: 10px;
     }
 
-    /* Moldura Mobile com efeito Neon Neon Glow */
+    /* Moldura Mobile */
     .mobile-frame {
       width: 100%;
       max-width: 410px;
@@ -69,6 +69,15 @@
       padding-bottom: 20px;
     }
 
+    /* Esconde barra de rolagem mas mantém rolagem funcional */
+    .content-area::-webkit-scrollbar {
+      display: none;
+    }
+    .content-area {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
     .screen {
       display: none;
     }
@@ -77,7 +86,7 @@
       display: block;
     }
 
-    /* Cartões no estilo Vidro Neon (Glassmorphism) */
+    /* Cartões em Glassmorphism */
     .glass-box {
       background: var(--glass-card);
       backdrop-filter: blur(16px);
@@ -89,12 +98,12 @@
       box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
     }
 
-    /* Card Hero / Imagem com iluminação neon */
+    /* Card Hero / Imagem Principal */
     .hero-card {
       position: relative;
       border-radius: 30px;
       overflow: hidden;
-      height: 680px;
+      height: 670px;
       margin-bottom: 16px;
       border: 1px solid rgba(217, 70, 239, 0.4);
       box-shadow: 0 0 25px var(--glow-purple);
@@ -159,7 +168,7 @@
       text-shadow: 0 0 10px var(--glow-purple);
     }
 
-    /* Menu Flutuante Inferior (Estilo da imagem de exemplo) */
+    /* Menu Flutuante Inferior */
     .nav-bar-container {
       padding: 0 12px 12px;
     }
@@ -233,50 +242,21 @@
 
     <div class="content-area">
       
-      <!-- 1. TELA: ONBOARDING / TELA DE ENTRADA -->
+      <!-- 1. TELA PRINCIPAL / INÍCIO COM FOTO -->
       <div id="screen-onboarding" class="screen active">
         <div class="hero-card">
-          <!-- Ilustração com degradê e brilho interno -->
           <img src="foto.jpg" class="hero-img" alt="Dra. Cibele Arabise">
+          
           <div class="hero-overlay">
             <span class="tag">ORTODONTIA & ESTÉTICA</span>
             <h1 style="font-size: 24px; margin-bottom: 6px; text-shadow: 0 0 10px rgba(255,255,255,0.5);">Dra. Cibele Arabise</h1>
             <p style="color: var(--text-muted); font-size: 13px; margin-bottom: 18px; line-height: 1.4;">Especialista em Ortodontia Estética & Alinhadores Invisíveis.</p>
-            <button class="btn-neon" onclick="switchTab('screen-home', 'nav-home')">Acessar Aplicativo</button>
+            <button class="btn-neon" onclick="switchTab('screen-booking', 'nav-booking')">Agendar Consulta</button>
           </div>
         </div>
       </div>
 
-      <!-- 2. TELA: DASHBOARD -->
-      <div id="screen-home" class="screen">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-          <div>
-            <span style="color: var(--text-muted); font-size: 12px;">Bem-vindo(a)</span>
-            <h2 style="font-size: 20px; text-shadow: 0 0 10px var(--glow-purple);">Dra. Cibele Arabise</h2>
-          </div>
-          <div style="width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, #a855f7, #d946ef); border: 2px solid rgba(255,255,255,0.3); display: flex; align-items: center; justify-content: center; font-size: 20px; box-shadow: 0 0 15px var(--glow-pink);">👩‍⚕️</div>
-        </div>
-
-        <div class="glass-box" style="border-color: rgba(217, 70, 239, 0.4); background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(217, 70, 239, 0.15));">
-          <span class="tag">PRÓXIMA CONSULTA</span>
-          <h3 style="font-size: 16px; margin-top: 4px;">Manutenção do Alinhador</h3>
-          <p style="font-size: 13px; color: #e9d5ff; margin-top: 6px;">📅 Quinta-feira, 18 de Março às 14:30</p>
-        </div>
-
-        <div class="section-title">Acesso Rápido</div>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
-          <div class="glass-box" style="text-align: center; margin-bottom: 0; cursor: pointer;" onclick="switchTab('screen-dentists', 'nav-dentists')">
-            <span style="font-size: 28px; display: block; margin-bottom: 6px;">🩺</span>
-            <span style="font-size: 13px; font-weight: 600;">Especialistas</span>
-          </div>
-          <div class="glass-box" style="text-align: center; margin-bottom: 0; cursor: pointer;" onclick="switchTab('screen-booking', 'nav-booking')">
-            <span style="font-size: 28px; display: block; margin-bottom: 6px;">📅</span>
-            <span style="font-size: 13px; font-weight: 600;">Agendar</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- 3. TELA: ESPECIALISTAS -->
+      <!-- 2. TELA: ESPECIALISTAS -->
       <div id="screen-dentists" class="screen">
         <div class="section-title">Especialistas</div>
         <div class="glass-box" style="display: flex; gap: 14px; align-items: center; cursor: pointer;" onclick="switchTab('screen-doctor-profile', 'nav-dentists')">
@@ -289,7 +269,7 @@
         </div>
       </div>
 
-      <!-- 4. TELA: PERFIL DENTISTA -->
+      <!-- 3. TELA: PERFIL DENTISTA -->
       <div id="screen-doctor-profile" class="screen">
         <div class="glass-box" style="text-align: center;">
           <div style="width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #8b5cf6, #d946ef); margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; font-size: 38px; box-shadow: 0 0 20px var(--glow-pink);">👩‍⚕️</div>
@@ -300,7 +280,7 @@
         <button class="btn-neon" onclick="switchTab('screen-booking', 'nav-booking')">Agendar Consulta</button>
       </div>
 
-      <!-- 5. TELA: AGENDA -->
+      <!-- 4. TELA: AGENDA -->
       <div id="screen-booking" class="screen">
         <div class="section-title">Agendar Horário</div>
         <div class="glass-box">
@@ -319,7 +299,7 @@
         </div>
       </div>
 
-      <!-- 6. TELA: CHAT -->
+      <!-- 5. TELA: CHAT -->
       <div id="screen-chat" class="screen">
         <div class="section-title">Chat & Suporte</div>
         <div style="display: flex; flex-direction: column; height: 480px; justify-content: space-between;">
@@ -334,7 +314,7 @@
         </div>
       </div>
 
-      <!-- 7. TELA: MINHAS CONSULTAS -->
+      <!-- 6. TELA: MINHAS CONSULTAS -->
       <div id="screen-manage" class="screen">
         <div class="section-title">Minhas Consultas</div>
         <div class="glass-box" style="border-color: rgba(217, 70, 239, 0.4);">
@@ -345,7 +325,7 @@
         </div>
       </div>
 
-      <!-- 8. TELA: AJUSTES -->
+      <!-- 7. TELA: AJUSTES -->
       <div id="screen-settings" class="screen">
         <div class="section-title">Ajustes</div>
         <div class="glass-box">
@@ -360,7 +340,7 @@
     <!-- Navegação Inferior Flutuante -->
     <div class="nav-bar-container">
       <div class="nav-bar">
-        <div id="nav-home" class="nav-item" onclick="switchTab('screen-home', 'nav-home')">
+        <div id="nav-home" class="nav-item active" onclick="switchTab('screen-onboarding', 'nav-home')">
           <span class="nav-icon">🏠</span>Início
         </div>
         <div id="nav-dentists" class="nav-item" onclick="switchTab('screen-dentists', 'nav-dentists')">
