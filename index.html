@@ -6,14 +6,17 @@
   <title>Ortodontia & Estética - Dra. Cibele Arabise</title>
   <style>
     :root {
-      --bg-dark: #0b0713;
-      --card-bg: #181224;
-      --card-border: #2a1f3d;
-      --accent-purple: #7b2cbf;
-      --accent-pink: #d946ef;
-      --accent-neon: #a855f7;
+      --bg-gradient: linear-gradient(165deg, #1b0a2a 0%, #2e0f4f 35%, #150724 70%, #0c0316 100%);
+      --glass-card: rgba(255, 255, 255, 0.08);
+      --glass-card-hover: rgba(255, 255, 255, 0.12);
+      --glass-border: rgba(255, 255, 255, 0.15);
+      --accent-purple: #8b5cf6;
+      --accent-magenta: #d946ef;
+      --accent-neon-blue: #38bdf8;
+      --glow-purple: rgba(139, 92, 246, 0.4);
+      --glow-pink: rgba(217, 70, 239, 0.4);
       --text-white: #ffffff;
-      --text-muted: #9ca3af;
+      --text-muted: #c4b5fd;
     }
 
     * {
@@ -24,7 +27,7 @@
     }
 
     body {
-      background-color: #050308;
+      background-color: #080310;
       color: var(--text-white);
       display: flex;
       justify-content: center;
@@ -33,26 +36,29 @@
       padding: 10px;
     }
 
+    /* Moldura Mobile com efeito Neon Neon Glow */
     .mobile-frame {
       width: 100%;
       max-width: 410px;
       height: 840px;
-      background: linear-gradient(180deg, #120c1f 0%, #08040d 100%);
-      border: 1px solid var(--card-border);
-      border-radius: 40px;
-      box-shadow: 0 0 35px rgba(123, 44, 191, 0.35);
+      background: var(--bg-gradient);
+      border: 1px solid var(--glass-border);
+      border-radius: 44px;
+      box-shadow: 0 0 50px rgba(139, 92, 246, 0.4), inset 0 0 15px rgba(217, 70, 239, 0.2);
       overflow: hidden;
       display: flex;
       flex-direction: column;
       position: relative;
     }
 
+    /* Status Bar */
     .status-bar {
-      padding: 15px 20px 5px;
+      padding: 16px 22px 6px;
       display: flex;
       justify-content: space-between;
       font-size: 12px;
-      color: var(--text-muted);
+      font-weight: 600;
+      color: #e9d5ff;
       z-index: 10;
     }
 
@@ -71,21 +77,34 @@
       display: block;
     }
 
-    /* Visual Onboarding e Cards */
+    /* Cartões no estilo Vidro Neon (Glassmorphism) */
+    .glass-box {
+      background: var(--glass-card);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      padding: 18px;
+      margin-bottom: 14px;
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    }
+
+    /* Card Hero / Imagem com iluminação neon */
     .hero-card {
       position: relative;
-      border-radius: 24px;
+      border-radius: 30px;
       overflow: hidden;
       height: 680px;
       margin-bottom: 16px;
-      border: 1px solid rgba(168, 85, 247, 0.4);
+      border: 1px solid rgba(217, 70, 239, 0.4);
+      box-shadow: 0 0 25px var(--glow-purple);
     }
 
     .hero-img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center top;
+      object-position: center;
     }
 
     .hero-overlay {
@@ -93,60 +112,69 @@
       bottom: 0;
       left: 0;
       right: 0;
-      padding: 24px 20px;
-      background: linear-gradient(to top, rgba(13, 9, 20, 0.98) 50%, rgba(13, 9, 20, 0.4) 80%, transparent 100%);
+      padding: 28px 20px;
+      background: linear-gradient(to top, rgba(15, 5, 29, 0.95) 45%, rgba(27, 10, 42, 0.6) 80%, transparent 100%);
+      backdrop-filter: blur(4px);
     }
 
-    .card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 18px;
-      padding: 16px;
-      margin-bottom: 14px;
+    .tag {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      background: linear-gradient(90deg, rgba(217, 70, 239, 0.3), rgba(139, 92, 246, 0.3));
+      color: #f472b6;
+      border: 1px solid rgba(217, 70, 239, 0.5);
+      margin-bottom: 10px;
+      box-shadow: 0 0 10px rgba(217, 70, 239, 0.3);
     }
 
     .btn-neon {
       width: 100%;
-      padding: 14px;
+      padding: 16px;
       border: none;
-      border-radius: 14px;
-      background: linear-gradient(90deg, var(--accent-purple), var(--accent-pink));
+      border-radius: 20px;
+      background: linear-gradient(90deg, #a855f7, #d946ef);
       color: #fff;
-      font-weight: bold;
-      font-size: 14px;
+      font-weight: 700;
+      font-size: 15px;
       cursor: pointer;
       text-align: center;
-      box-shadow: 0 0 15px rgba(217, 70, 239, 0.4);
+      box-shadow: 0 0 20px rgba(217, 70, 239, 0.6);
+      transition: all 0.3s ease;
+    }
+
+    .btn-neon:active {
+      transform: scale(0.98);
+      box-shadow: 0 0 10px rgba(217, 70, 239, 0.4);
     }
 
     .section-title {
       font-size: 18px;
       font-weight: 700;
-      margin-bottom: 12px;
-      color: var(--text-white);
+      margin: 16px 0 12px;
+      color: #f3e8ff;
+      text-shadow: 0 0 10px var(--glow-purple);
     }
 
-    .tag {
-      display: inline-block;
-      padding: 4px 10px;
-      border-radius: 12px;
-      font-size: 10px;
-      font-weight: bold;
-      background: rgba(168, 85, 247, 0.2);
-      color: var(--accent-pink);
-      border: 1px solid rgba(217, 70, 239, 0.3);
-      margin-bottom: 8px;
+    /* Menu Flutuante Inferior (Estilo da imagem de exemplo) */
+    .nav-bar-container {
+      padding: 0 12px 12px;
     }
 
-    /* Menu Inferior */
     .nav-bar {
-      height: 70px;
-      background: rgba(24, 18, 36, 0.95);
-      border-top: 1px solid var(--card-border);
+      height: 64px;
+      background: rgba(23, 10, 38, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 32px;
       display: flex;
       justify-content: space-around;
       align-items: center;
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
     }
 
     .nav-item {
@@ -155,33 +183,42 @@
       text-align: center;
       cursor: pointer;
       flex: 1;
+      transition: all 0.2s;
     }
 
     .nav-item.active {
-      color: var(--accent-pink);
+      color: #f0abfc;
       font-weight: bold;
+      text-shadow: 0 0 8px var(--glow-pink);
     }
 
-    /* Chat UI */
+    .nav-icon {
+      font-size: 18px;
+      margin-bottom: 2px;
+      display: block;
+    }
+
+    /* Balões do Chat */
     .chat-bubble {
       max-width: 80%;
       padding: 12px 16px;
-      border-radius: 16px;
+      border-radius: 20px;
       font-size: 13px;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
       line-height: 1.4;
     }
 
     .chat-left {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      align-self: flex-start;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--glass-border);
+      color: #e9d5ff;
     }
 
     .chat-right {
-      background: linear-gradient(90deg, var(--accent-purple), var(--accent-pink));
-      align-self: flex-end;
+      background: linear-gradient(135deg, #8b5cf6, #d946ef);
+      color: #fff;
       margin-left: auto;
+      box-shadow: 0 0 15px rgba(217, 70, 239, 0.4);
     }
   </style>
 </head>
@@ -196,149 +233,151 @@
 
     <div class="content-area">
       
-      <!-- 1. TELA: INTEGRAÇÃO / ONBOARDING (PRIMEIRA PÁGINA) -->
+      <!-- 1. TELA: ONBOARDING / TELA DE ENTRADA -->
       <div id="screen-onboarding" class="screen active">
         <div class="hero-card">
-          <img src="https://lh3.googleusercontent.com/d/1aff9e" class="hero-img" id="doctor-img" alt="Dra. Cibele Arabise">
+          <!-- Ilustração com degradê e brilho interno -->
+          <img src="foto.jpg" class="hero-img" alt="Dra. Cibele Arabise">
           <div class="hero-overlay">
             <span class="tag">ORTODONTIA & ESTÉTICA</span>
-            <h1 style="font-size: 22px; margin-bottom: 6px;">Dra. Cibele Arabise</h1>
-            <p style="color: var(--text-muted); font-size: 13px; margin-bottom: 14px;">Especialista em Ortodontia Estética & Alinhadores Invisíveis.</p>
+            <h1 style="font-size: 24px; margin-bottom: 6px; text-shadow: 0 0 10px rgba(255,255,255,0.5);">Dra. Cibele Arabise</h1>
+            <p style="color: var(--text-muted); font-size: 13px; margin-bottom: 18px; line-height: 1.4;">Especialista em Ortodontia Estética & Alinhadores Invisíveis.</p>
             <button class="btn-neon" onclick="switchTab('screen-home', 'nav-home')">Acessar Aplicativo</button>
           </div>
         </div>
       </div>
 
-      <!-- 2. TELA: PAINEL INICIAL (DASHBOARD) -->
+      <!-- 2. TELA: DASHBOARD -->
       <div id="screen-home" class="screen">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
           <div>
             <span style="color: var(--text-muted); font-size: 12px;">Bem-vindo(a)</span>
-            <h2 style="font-size: 18px;">Ortodontia & Estética</h2>
+            <h2 style="font-size: 20px; text-shadow: 0 0 10px var(--glow-purple);">Dra. Cibele Arabise</h2>
           </div>
-          <div style="width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(45deg, var(--accent-purple), var(--accent-pink)); display: flex; align-items: center; justify-content: center; font-size: 18px;">👤</div>
+          <div style="width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, #a855f7, #d946ef); border: 2px solid rgba(255,255,255,0.3); display: flex; align-items: center; justify-content: center; font-size: 20px; box-shadow: 0 0 15px var(--glow-pink);">👩‍⚕️</div>
         </div>
 
-        <div class="card" style="background: linear-gradient(135deg, rgba(123, 44, 191, 0.3), rgba(217, 70, 239, 0.1)); border-color: var(--accent-pink);">
+        <div class="glass-box" style="border-color: rgba(217, 70, 239, 0.4); background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(217, 70, 239, 0.15));">
           <span class="tag">PRÓXIMA CONSULTA</span>
-          <h3 style="font-size: 15px; margin-top: 4px;">Manutenção do Alinhador</h3>
-          <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">📅 Quinta-feira, 18 de Março às 14:30</p>
+          <h3 style="font-size: 16px; margin-top: 4px;">Manutenção do Alinhador</h3>
+          <p style="font-size: 13px; color: #e9d5ff; margin-top: 6px;">📅 Quinta-feira, 18 de Março às 14:30</p>
         </div>
 
         <div class="section-title">Acesso Rápido</div>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px;">
-          <div class="card" style="text-align: center; margin-bottom: 0;" onclick="switchTab('screen-dentists', 'nav-dentists')">
-            <div style="font-size: 24px; margin-bottom: 6px;">🩺</div>
-            <span style="font-size: 12px; font-weight: bold;">Especialistas</span>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+          <div class="glass-box" style="text-align: center; margin-bottom: 0; cursor: pointer;" onclick="switchTab('screen-dentists', 'nav-dentists')">
+            <span style="font-size: 28px; display: block; margin-bottom: 6px;">🩺</span>
+            <span style="font-size: 13px; font-weight: 600;">Especialistas</span>
           </div>
-          <div class="card" style="text-align: center; margin-bottom: 0;" onclick="switchTab('screen-booking', 'nav-booking')">
-            <div style="font-size: 24px; margin-bottom: 6px;">📅</div>
-            <span style="font-size: 12px; font-weight: bold;">Agendar</span>
+          <div class="glass-box" style="text-align: center; margin-bottom: 0; cursor: pointer;" onclick="switchTab('screen-booking', 'nav-booking')">
+            <span style="font-size: 28px; display: block; margin-bottom: 6px;">📅</span>
+            <span style="font-size: 13px; font-weight: 600;">Agendar</span>
           </div>
         </div>
       </div>
 
-      <!-- 3. TELA: LISTA DE DENTISTAS -->
+      <!-- 3. TELA: ESPECIALISTAS -->
       <div id="screen-dentists" class="screen">
-        <div class="section-title">Nossos Especialistas</div>
-        
-        <div class="card" style="display: flex; gap: 12px; align-items: center; cursor: pointer;" onclick="switchTab('screen-doctor-profile', 'nav-dentists')">
-          <div style="width: 60px; height: 60px; border-radius: 12px; background: #2a1f3d; display: flex; align-items: center; justify-content: center; font-size: 24px;">👩‍⚕️</div>
+        <div class="section-title">Especialistas</div>
+        <div class="glass-box" style="display: flex; gap: 14px; align-items: center; cursor: pointer;" onclick="switchTab('screen-doctor-profile', 'nav-dentists')">
+          <div style="width: 55px; height: 55px; border-radius: 18px; background: linear-gradient(135deg, #8b5cf6, #d946ef); display: flex; align-items: center; justify-content: center; font-size: 26px; box-shadow: 0 0 12px var(--glow-pink);">👩‍⚕️</div>
           <div>
-            <h3 style="font-size: 14px;">Dra. Cibele Arabise</h3>
-            <p style="font-size: 11px; color: var(--accent-pink);">Ortodontia & Estética</p>
-            <p style="font-size: 10px; color: var(--text-muted); margin-top: 2px;">⭐ 5.0 (120+ avaliações)</p>
+            <h3 style="font-size: 15px;">Dra. Cibele Arabise</h3>
+            <p style="font-size: 12px; color: #f472b6;">Ortodontia & Estética</p>
+            <p style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">⭐ 5.0 (120+ avaliações)</p>
           </div>
         </div>
       </div>
 
-      <!-- 4. TELA: PERFIL DO DENTISTA -->
+      <!-- 4. TELA: PERFIL DENTISTA -->
       <div id="screen-doctor-profile" class="screen">
-        <div class="card" style="text-align: center;">
-          <div style="width: 90px; height: 90px; border-radius: 50%; background: linear-gradient(45deg, var(--accent-purple), var(--accent-pink)); margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; font-size: 40px;">👩‍⚕️</div>
+        <div class="glass-box" style="text-align: center;">
+          <div style="width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #8b5cf6, #d946ef); margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; font-size: 38px; box-shadow: 0 0 20px var(--glow-pink);">👩‍⚕️</div>
           <h2 style="font-size: 18px;">Dra. Cibele Arabise</h2>
-          <p style="color: var(--accent-pink); font-size: 12px; margin-bottom: 8px;">Ortodontista & Estética Orofacial</p>
-          <p style="color: var(--text-muted); font-size: 12px; line-height: 1.4;">Especializada em transformação do sorriso através de alinhadores invisíveis e estética de alta precisão.</p>
+          <p style="color: #f472b6; font-size: 12px; margin-bottom: 10px;">Ortodontista & Estética Orofacial</p>
+          <p style="color: var(--text-muted); font-size: 12px; line-height: 1.5;">Transformando sorrisos com tecnologia de ponta, alinhadores invisíveis e procedimentos estéticos personalizados.</p>
         </div>
-        <button class="btn-neon" onclick="switchTab('screen-booking', 'nav-booking')">Agendar com a Dra.</button>
+        <button class="btn-neon" onclick="switchTab('screen-booking', 'nav-booking')">Agendar Consulta</button>
       </div>
 
-      <!-- 5. TELA: AGENDAMENTO DE CONSULTAS -->
+      <!-- 5. TELA: AGENDA -->
       <div id="screen-booking" class="screen">
-        <div class="section-title">Agendar Consulta</div>
-        <div class="card">
-          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 10px;">Selecione a data:</p>
-          <div style="display: flex; gap: 8px; margin-bottom: 15px;">
-            <div style="flex: 1; padding: 10px; background: rgba(168, 85, 247, 0.2); border-radius: 8px; text-align: center; font-size: 11px; border: 1px solid var(--accent-pink);">Qui<br><strong>18 Mar</strong></div>
-            <div style="flex: 1; padding: 10px; background: rgba(255,255,255,0.03); border-radius: 8px; text-align: center; font-size: 11px;">Sex<br><strong>19 Mar</strong></div>
-            <div style="flex: 1; padding: 10px; background: rgba(255,255,255,0.03); border-radius: 8px; text-align: center; font-size: 11px;">Seg<br><strong>22 Mar</strong></div>
+        <div class="section-title">Agendar Horário</div>
+        <div class="glass-box">
+          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">Escolha a data:</p>
+          <div style="display: flex; gap: 8px; margin-bottom: 18px;">
+            <div style="flex: 1; padding: 12px; background: rgba(217, 70, 239, 0.25); border-radius: 14px; text-align: center; font-size: 11px; border: 1px solid #d946ef; box-shadow: 0 0 10px var(--glow-pink);">Qui<br><strong style="font-size: 13px;">18 Mar</strong></div>
+            <div style="flex: 1; padding: 12px; background: rgba(255, 255, 255, 0.05); border-radius: 14px; text-align: center; font-size: 11px;">Sex<br><strong style="font-size: 13px;">19 Mar</strong></div>
+            <div style="flex: 1; padding: 12px; background: rgba(255, 255, 255, 0.05); border-radius: 14px; text-align: center; font-size: 11px;">Seg<br><strong style="font-size: 13px;">22 Mar</strong></div>
           </div>
-          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 10px;">Horários:</p>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 15px;">
-            <button style="padding: 10px; background: rgba(217, 70, 239, 0.2); border: 1px solid var(--accent-pink); color: #fff; border-radius: 8px;">14:30</button>
-            <button style="padding: 10px; background: rgba(255,255,255,0.03); border: 1px solid var(--card-border); color: #fff; border-radius: 8px;">16:00</button>
+          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">Horários disponíveis:</p>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 18px;">
+            <button style="padding: 12px; background: rgba(139, 92, 246, 0.3); border: 1px solid #a855f7; color: #fff; border-radius: 12px; font-weight: 600;">14:30</button>
+            <button style="padding: 12px; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--glass-border); color: #fff; border-radius: 12px;">16:00</button>
           </div>
           <button class="btn-neon" onclick="switchTab('screen-manage', 'nav-manage')">Confirmar Agendamento</button>
         </div>
       </div>
 
-      <!-- 6. TELA: CONSULTA POR CHAT -->
+      <!-- 6. TELA: CHAT -->
       <div id="screen-chat" class="screen">
-        <div class="section-title">Teleodontologia / Chat</div>
-        <div style="display: flex; flex-direction: column; height: 500px; justify-content: space-between;">
+        <div class="section-title">Chat & Suporte</div>
+        <div style="display: flex; flex-direction: column; height: 480px; justify-content: space-between;">
           <div>
-            <div class="chat-bubble chat-left">Olá! Como posso ajudar com o seu alinhador hoje?</div>
-            <div class="chat-bubble chat-right">Tenho uma dúvida sobre o tempo de uso diário.</div>
+            <div class="chat-bubble chat-left">Olá! Como posso te ajudar com seu tratamento hoje?</div>
+            <div class="chat-bubble chat-right">Gostaria de tirar uma dúvida sobre meus alinhadores.</div>
           </div>
           <div style="display: flex; gap: 8px;">
-            <input type="text" placeholder="Digite sua mensagem..." style="flex: 1; padding: 12px; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; color: #fff;">
-            <button style="padding: 12px; background: var(--accent-purple); border: none; border-radius: 12px; color: #fff; font-weight: bold;">Enviar</button>
+            <input type="text" placeholder="Digite uma mensagem..." style="flex: 1; padding: 14px; background: rgba(255,255,255,0.08); border: 1px solid var(--glass-border); border-radius: 16px; color: #fff; outline: none;">
+            <button style="padding: 0 18px; background: linear-gradient(135deg, #a855f7, #d946ef); border: none; border-radius: 16px; color: #fff; font-weight: bold; box-shadow: 0 0 10px var(--glow-pink);">Enviar</button>
           </div>
         </div>
       </div>
 
-      <!-- 7. TELA: GERENCIAMENTO DE CONSULTAS -->
+      <!-- 7. TELA: MINHAS CONSULTAS -->
       <div id="screen-manage" class="screen">
         <div class="section-title">Minhas Consultas</div>
-        <div class="card">
+        <div class="glass-box" style="border-color: rgba(217, 70, 239, 0.4);">
           <span class="tag">CONFIRMADA</span>
-          <h3 style="font-size: 14px; margin-top: 4px;">Ortodontia & Estética</h3>
+          <h3 style="font-size: 15px; margin-top: 4px;">Ortodontia & Estética</h3>
           <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Dra. Cibele Arabise</p>
-          <p style="font-size: 12px; color: var(--accent-pink); margin-top: 4px;">📅 18 de Março às 14:30</p>
+          <p style="font-size: 13px; color: #f472b6; margin-top: 6px; font-weight: 600;">📅 18 de Março às 14:30</p>
         </div>
       </div>
 
-      <!-- 8. TELA: CONFIGURAÇÕES -->
+      <!-- 8. TELA: AJUSTES -->
       <div id="screen-settings" class="screen">
-        <div class="section-title">Configurações</div>
-        <div class="card">
-          <p style="font-size: 13px; margin-bottom: 12px;">🔔 Notificações de Consulta</p>
-          <p style="font-size: 13px; margin-bottom: 12px;">🔒 Privacidade e Dados</p>
-          <p style="font-size: 13px; color: #ef4444;">🚪 Sair do Aplicativo</p>
+        <div class="section-title">Ajustes</div>
+        <div class="glass-box">
+          <p style="font-size: 14px; margin-bottom: 14px; display: flex; align-items: center; gap: 8px;">🔔 Notificações</p>
+          <p style="font-size: 14px; margin-bottom: 14px; display: flex; align-items: center; gap: 8px;">🔒 Privacidade e Termos</p>
+          <p style="font-size: 14px; color: #f87171; display: flex; align-items: center; gap: 8px;">🚪 Sair</p>
         </div>
       </div>
 
     </div>
 
-    <!-- Navegação Inferior -->
-    <div class="nav-bar">
-      <div id="nav-home" class="nav-item" onclick="switchTab('screen-home', 'nav-home')">
-        <div style="font-size: 16px;">🏠</div>Início
-      </div>
-      <div id="nav-dentists" class="nav-item" onclick="switchTab('screen-dentists', 'nav-dentists')">
-        <div style="font-size: 16px;">🩺</div>Dentistas
-      </div>
-      <div id="nav-booking" class="nav-item" onclick="switchTab('screen-booking', 'nav-booking')">
-        <div style="font-size: 16px;">📅</div>Agenda
-      </div>
-      <div id="nav-chat" class="nav-item" onclick="switchTab('screen-chat', 'nav-chat')">
-        <div style="font-size: 16px;">💬</div>Chat
-      </div>
-      <div id="nav-manage" class="nav-item" onclick="switchTab('screen-manage', 'nav-manage')">
-        <div style="font-size: 16px;">📋</div>Consultas
-      </div>
-      <div id="nav-settings" class="nav-item" onclick="switchTab('screen-settings', 'nav-settings')">
-        <div style="font-size: 16px;">⚙️</div>Ajustes
+    <!-- Navegação Inferior Flutuante -->
+    <div class="nav-bar-container">
+      <div class="nav-bar">
+        <div id="nav-home" class="nav-item" onclick="switchTab('screen-home', 'nav-home')">
+          <span class="nav-icon">🏠</span>Início
+        </div>
+        <div id="nav-dentists" class="nav-item" onclick="switchTab('screen-dentists', 'nav-dentists')">
+          <span class="nav-icon">🩺</span>Dentistas
+        </div>
+        <div id="nav-booking" class="nav-item" onclick="switchTab('screen-booking', 'nav-booking')">
+          <span class="nav-icon">📅</span>Agenda
+        </div>
+        <div id="nav-chat" class="nav-item" onclick="switchTab('screen-chat', 'nav-chat')">
+          <span class="nav-icon">💬</span>Chat
+        </div>
+        <div id="nav-manage" class="nav-item" onclick="switchTab('screen-manage', 'nav-manage')">
+          <span class="nav-icon">📋</span>Consultas
+        </div>
+        <div id="nav-settings" class="nav-item" onclick="switchTab('screen-settings', 'nav-settings')">
+          <span class="nav-icon">⚙️</span>Ajustes
+        </div>
       </div>
     </div>
   </div>
